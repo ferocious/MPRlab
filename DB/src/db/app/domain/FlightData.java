@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FlightData {
+public class FlightData extends Entity {
 
 	private String flightNo;
 	private AirlineData airline;

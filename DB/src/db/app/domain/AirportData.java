@@ -1,6 +1,6 @@
 package db.app.domain;
 
-public class AirportData {
+public class AirportData extends Entity {
 
 	private String airportCode;
 	private String airportCity;
@@ -38,9 +38,5 @@ public class AirportData {
 	public void setAirportAddress(String airportAddress) {
 		this.airportAddress = airportAddress;
 	}
-	
-	
-	
-	
 	
 }

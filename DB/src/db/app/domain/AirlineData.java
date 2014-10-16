@@ -1,6 +1,6 @@
 package db.app.domain;
 
-public class AirlineData {
+public class AirlineData extends Entity {
 
 	private String airlineCode;
 	private String name;
