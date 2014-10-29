@@ -2,7 +2,9 @@ package db.app.repositories;
 
 import java.util.List;
 
-public interface IRepository<TEntity> {
+import db.app.domain.Entity;
+
+public interface IRepository<TEntity extends Entity> {
 
 	public void save(TEntity entity);
 	public void update(TEntity entity);
