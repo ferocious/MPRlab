@@ -24,10 +24,10 @@ public class DummyPassengerDataRepository implements IPassengerDataRepository {
 		
 		if (passenger != null) {
 			passenger.setIdType(entity.getIdType());
-			passenger.setLuggageInfo(entity.getLuggageInfo());
-			passenger.setName(entity.getName());
-			passenger.setPriority(entity.getPriority());
-			passenger.setReservationNo(entity.getReservationNo());
+//			passenger.setLuggageInfo(entity.getLuggageInfo());
+//			passenger.setName(entity.getName());
+//			passenger.setPriority(entity.getPriority());
+//			passenger.setReservationNo(entity.getReservationNo());
 		}
 	}
 
@@ -53,12 +53,12 @@ public class DummyPassengerDataRepository implements IPassengerDataRepository {
 	}
 
 	@Override
-	public PassengerData withReservationNo(String reservationNo) {
-		for (PassengerData passenger : db.passengers) {
-			if (passenger.getReservationNo().equals(reservationNo)) {
-				return passenger;
-			}
-		}
+	public PassengerData withIdNo(String reservationNo) {
+//		for (PassengerData passenger : db.passengers) {
+//			if (passenger.getReservationNo().equals(reservationNo)) {
+//				return passenger;
+//			}
+//		}
 		
 		return null;
 	}

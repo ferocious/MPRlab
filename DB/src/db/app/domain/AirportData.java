@@ -4,8 +4,8 @@ public class AirportData extends Entity {
 
 	private String airportCode;
 	private String airportCity;
-	private String airportCountry;
 	private String airportAddress;
+	private CountryData country;
 	
 	public String getAirportCode() {
 		return airportCode;
@@ -23,14 +23,6 @@ public class AirportData extends Entity {
 		this.airportCity = airportCity;
 	}
 	
-	public String getAirportCountry() {
-		return airportCountry;
-	}
-	
-	public void setAirportCountry(String airportCountry) {
-		this.airportCountry = airportCountry;
-	}
-	
 	public String getAirportAddress() {
 		return airportAddress;
 	}
@@ -38,5 +30,19 @@ public class AirportData extends Entity {
 	public void setAirportAddress(String airportAddress) {
 		this.airportAddress = airportAddress;
 	}
-	
+
+	public CountryData getCountry() {
+		return country;
+	}
+
+	public void setCountry(CountryData country) {
+		this.country = country;
+	}
+
+	@Override
+	public String toString() {
+		return "AirportData [airportCode=" + airportCode + ", airportCity="
+				+ airportCity + ", airportAddress=" + airportAddress
+				+ ", country=" + country + "]";
+	}
 }

@@ -2,26 +2,26 @@ package db.app.domain;
 
 public class PassengerData extends Entity {
 
-	private String name;
-	private String reservationNo;
+	private String firstName;
+	private String lastName;
 	private String idType;
-	private String luggageInfo;
-	private String priority;
+	private String idNo;
+	private CountryData country;
 	
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
-	public String getReservationNo() {
-		return reservationNo;
+	public String getLastName() {
+		return lastName;
 	}
 	
-	public void setReservationNo(String reservationNo) {
-		this.reservationNo = reservationNo;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public String getIdType() {
@@ -32,22 +32,27 @@ public class PassengerData extends Entity {
 		this.idType = idType;
 	}
 	
-	public String getLuggageInfo() {
-		return luggageInfo;
+	public String getIdNo() {
+		return idNo;
 	}
 	
-	public void setLuggageInfo(String luggageInfo) {
-		this.luggageInfo = luggageInfo;
+	public void setIdNo(String idNo) {
+		this.idNo = idNo;
 	}
 	
-	public String getPriority() {
-		return priority;
+	public CountryData getCountry() {
+		return country;
 	}
 	
-	public void setPriority(String priority) {
-		this.priority = priority;
+	public void setCountry(CountryData country) {
+		this.country = country;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "PassengerData [firstName=" + firstName + ", lastName="
+				+ lastName + ", idType=" + idType + ", idNo=" + idNo
+				+ ", country=" + country + "]";
+	}
 	
 }

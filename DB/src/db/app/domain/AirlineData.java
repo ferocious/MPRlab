@@ -4,7 +4,7 @@ public class AirlineData extends Entity {
 
 	private String airlineCode;
 	private String name;
-	private String airlineCountry;
+	private CountryData airlineCountry;
 	
 	public String getAirlineCode() {
 		return airlineCode;
@@ -21,14 +21,19 @@ public class AirlineData extends Entity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getAirlineCountry() {
+
+	public CountryData getAirlineCountry() {
 		return airlineCountry;
 	}
-	
-	public void setAirlineCountry(String airlineCountry) {
+
+	public void setAirlineCountry(CountryData airlineCountry) {
 		this.airlineCountry = airlineCountry;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "AirlineData [airlineCode=" + airlineCode + ", name=" + name
+				+ ", airlineCountry=" + airlineCountry + "]";
+	}
 	
 }

@@ -24,13 +24,13 @@ public class DummyFlightDataRepository implements IFlightDataRepository {
 		
 		if (flight != null) {
 			flight.setAirline(entity.getAirline());
-			flight.setAirplaneType(entity.getAirplaneType());
-			flight.setArrivalDate(entity.getArrivalDate());
-			flight.setDepartureDate(entity.getDepartureDate());
-			flight.setFlightFrom(entity.getFlightFrom());
-			flight.setFlightNo(entity.getFlightNo());
-			flight.setFlightTo(entity.getFlightTo());
-			flight.setPassengersList(entity.getPassengersList());
+//			flight.setAirplaneType(entity.getAirplaneType());
+//			flight.setArrivalDate(entity.getArrivalDate());
+//			flight.setDepartureDate(entity.getDepartureDate());
+//			flight.setFlightFrom(entity.getFlightFrom());
+//			flight.setFlightNo(entity.getFlightNo());
+//			flight.setFlightTo(entity.getFlightTo());
+//			flight.setPassengersList(entity.getPassengersList());
 		}
 	}
 

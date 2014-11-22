@@ -26,7 +26,7 @@ public class DummyAirportDataRepository implements IAirportDataRepository {
 			airport.setAirportAddress(entity.getAirportAddress());
 			airport.setAirportCity(entity.getAirportCity());
 			airport.setAirportCode(entity.getAirportCode());
-			airport.setAirportCountry(entity.getAirportCountry());
+//			airport.setAirportCountry(entity.getAirportCountry());
 		}
 	}
 

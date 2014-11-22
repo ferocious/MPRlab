@@ -1,35 +1,64 @@
 package db.app.domain;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
+
 
 public class FlightData extends Entity {
 
 	private String flightNo;
+	private Timestamp departureDate;
+	private Timestamp arrivalDate;
+	private Timestamp createDate;
+	private AirportData departureAirport;
+	private AirportData arrivalAirport;
 	private AirlineData airline;
-	private String airplaneType;
-	private AirportData flightFrom;
-	private AirportData flightTo;
-	private Date departureDate;
-	private Date arrivalDate;
-	private List<PassengerData> passengersList = new ArrayList<>();
 	
-	
-	public String getAirplaneType() {
-		return airplaneType;
-	}
-
-	public void setAirplaneType(String airplaneType) {
-		this.airplaneType = airplaneType;
-	}
-
 	public String getFlightNo() {
 		return flightNo;
 	}
 	
 	public void setFlightNo(String flightNo) {
 		this.flightNo = flightNo;
+	}
+	
+	public Timestamp getDepartureDate() {
+		return departureDate;
+	}
+	
+	public void setDepartureDate(Timestamp departureDate) {
+		this.departureDate = departureDate;
+	}
+	
+	public Timestamp getArrivalDate() {
+		return arrivalDate;
+	}
+	
+	public void setArrivalDate(Timestamp arrivalDate) {
+		this.arrivalDate = arrivalDate;
+	}
+	
+	public Timestamp getCreateDate() {
+		return createDate;
+	}
+	
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+	
+	public AirportData getDepartureAirport() {
+		return departureAirport;
+	}
+	
+	public void setDepartureAirport(AirportData departureAirport) {
+		this.departureAirport = departureAirport;
+	}
+	
+	public AirportData getArrivalAirport() {
+		return arrivalAirport;
+	}
+	
+	public void setArrivalAirport(AirportData arrivalAirport) {
+		this.arrivalAirport = arrivalAirport;
 	}
 	
 	public AirlineData getAirline() {
@@ -40,46 +69,13 @@ public class FlightData extends Entity {
 		this.airline = airline;
 	}
 	
-	public AirportData getFlightFrom() {
-		return flightFrom;
+	@Override
+	public String toString() {
+		return "FlightData [flightNo=" + flightNo + ", departureDate="
+				+ departureDate + ", arrivalDate=" + arrivalDate
+				+ ", createDate=" + createDate + ", departureAirport="
+				+ departureAirport + ", arrivalAirport=" + arrivalAirport
+				+ ", airline=" + airline + "]";
 	}
-	
-	public void setFlightFrom(AirportData flightFrom) {
-		this.flightFrom = flightFrom;
-	}
-	
-	public AirportData getFlightTo() {
-		return flightTo;
-	}
-	
-	public void setFlightTo(AirportData flightTo) {
-		this.flightTo = flightTo;
-	}
-	
-	public Date getDepartureDate() {
-		return departureDate;
-	}
-	
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-	}
-	
-	public Date getArrivalDate() {
-		return arrivalDate;
-	}
-	
-	public void setArrivalDate(Date arrivalDate) {
-		this.arrivalDate = arrivalDate;
-	}
-	
-	public List<PassengerData> getPassengersList() {
-		return passengersList;
-	}
-	
-	public void setPassengersList(List<PassengerData> passengersList) {
-		this.passengersList = passengersList;
-	}
-	
-	
 	
 }
