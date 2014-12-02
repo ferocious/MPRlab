@@ -4,176 +4,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import db.app.domain.AirlineData;
-import db.app.domain.AirportData;
 import db.app.domain.FlightData;
 import db.app.repositories.IFlightDataRepository;
+import db.app.repositories.impl.builder.FlightDataBuilder;
 
-public class FlightRepository implements IFlightDataRepository {
+public class FlightRepository extends Repository<FlightData> implements IFlightDataRepository {
 
-	private String insertSql = "INSERT INTO flight(id, flight_no, departure_date, "
+	private static String insertSql = "INSERT INTO flight(id, flight_no, departure_date, "
 			+ "arrival_date, create_date, dep_airport_id, arr_airport_id, airline_id) "
 			+ "VALUES(?,?,?,?,?,?,?,?)";
 	
-	private String updateSql = "UPDATE flight SET flight_no = ?, departure_date = ?, arrival_date = ?, "
+	private static String updateSql = "UPDATE flight SET flight_no = ?, departure_date = ?, arrival_date = ?, "
 			+ "create_date = ?, create_date = ?, dep_airport_id = ?, arr_airport_id = ?, "
 			+ "airline_id = ? WHERE id = ?";
 	
-	private String deleteSql = "DELETE FROM flight WHERE id = ?";
+	private static String selectByFlightNoSql = "SELECT * FROM flight WHERE flight_no = ?";
 	
-	private String selectByIdSql = "SELECT * FROM flight WHERE id = ?";
-
-	private String selectByFlightNoSql = "SELECT * FROM flight WHERE flight_no = ?";
-	
-	private String selectAllSql = "SELECT * FROM flight";
-
-	private PreparedStatement insertStatement;
-	
-	private PreparedStatement updateStatement;
-
-	private PreparedStatement deleteStatement;
-
-	private PreparedStatement selectByIdStatement;
-
 	private PreparedStatement selectByFlightNoStatement;
-
-	private PreparedStatement selectAllStatement;
 	
 	public FlightRepository(Connection connection) {
+		super(connection, new FlightDataBuilder());
+		
 		try {
-			insertStatement = connection.prepareStatement(insertSql);
-			updateStatement = connection.prepareStatement(updateSql);
-			deleteStatement = connection.prepareStatement(deleteSql);
-			selectByIdStatement = connection.prepareStatement(selectByIdSql);
 			selectByFlightNoStatement = connection.prepareStatement(selectByFlightNoSql);
-			selectAllStatement = connection.prepareStatement(selectAllSql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@Override
-	public void save(FlightData entity) {
-		try {
-			insertStatement.setInt(1, entity.getId());
-			insertStatement.setString(2, entity.getFlightNo());
-			insertStatement.setTimestamp(3, entity.getDepartureDate());
-			insertStatement.setTimestamp(4, entity.getArrivalDate());
-			insertStatement.setTimestamp(5, entity.getCreateDate());
-			insertStatement.setInt(6, entity.getDepartureAirport().getId());
-			insertStatement.setInt(7, entity.getArrivalAirport().getId());
-			insertStatement.setInt(8, entity.getAirline().getId());
-			
-			insertStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void update(FlightData entity) {
-		try {
-			updateStatement.setString(1, entity.getFlightNo());
-			updateStatement.setTimestamp(2, entity.getDepartureDate());
-			updateStatement.setTimestamp(3, entity.getArrivalDate());
-			updateStatement.setTimestamp(4, entity.getCreateDate());
-			updateStatement.setInt(5, entity.getDepartureAirport().getId());
-			updateStatement.setInt(6, entity.getArrivalAirport().getId());
-			updateStatement.setInt(7, entity.getAirline().getId());
-			updateStatement.setInt(8, entity.getId());
-			
-			updateStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void delete(FlightData entity) {
-		try {
-			deleteStatement.setInt(1, entity.getId());
-			
-			deleteStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public FlightData get(int id) {
-		try {
-			selectByIdStatement.setInt(1, id);
-
-			ResultSet result = selectByIdStatement.executeQuery();
-			
-			if (result.next()) {
-				FlightData flight = new FlightData();
-				
-				AirportData depAirport = new AirportData();
-				depAirport.setId(result.getInt("dep_airport_id"));
-				
-				AirportData arrAirport = new AirportData();
-				depAirport.setId(result.getInt("arr_airport_id"));
-				
-				AirlineData airline = new AirlineData();
-				airline.setId(result.getInt("airline_id"));
-				
-				flight.setId(result.getInt("id"));
-				flight.setArrivalDate(result.getTimestamp("arrival_date"));
-				flight.setDepartureDate(result.getTimestamp("departure_date"));
-				flight.setFlightNo(result.getString("flight_no"));
-				flight.setAirline(airline);
-				flight.setArrivalAirport(arrAirport);
-				flight.setDepartureAirport(depAirport);
-				
-				return flight;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
-	@Override
-	public List<FlightData> getAll() {
-		List<FlightData> resultList = new ArrayList<>();
-		
-		try {
-			ResultSet result = selectAllStatement.executeQuery();
-			
-			if (result.next()) {
-				FlightData flight = new FlightData();
-				
-				AirportData depAirport = new AirportData();
-				depAirport.setId(result.getInt("dep_airport_id"));
-				
-				AirportData arrAirport = new AirportData();
-				depAirport.setId(result.getInt("arr_airport_id"));
-				
-				AirlineData airline = new AirlineData();
-				airline.setId(result.getInt("airline_id"));
-				
-				flight.setId(result.getInt("id"));
-				flight.setArrivalDate(result.getTimestamp("arrival_date"));
-				flight.setDepartureDate(result.getTimestamp("departure_date"));
-				flight.setFlightNo(result.getString("flight_no"));
-				flight.setAirline(airline);
-				flight.setArrivalAirport(arrAirport);
-				flight.setDepartureAirport(depAirport);
-				
-				resultList.add(flight);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return resultList;
-	}
-
 	@Override
 	public FlightData withFlightNo(String flightNo) {
 		try {
@@ -182,24 +41,7 @@ public class FlightRepository implements IFlightDataRepository {
 			ResultSet result = selectByFlightNoStatement.executeQuery();
 			
 			if (result.next()) {
-				FlightData flight = new FlightData();
-				
-				AirportData depAirport = new AirportData();
-				depAirport.setId(result.getInt("dep_airport_id"));
-				
-				AirportData arrAirport = new AirportData();
-				depAirport.setId(result.getInt("arr_airport_id"));
-				
-				AirlineData airline = new AirlineData();
-				airline.setId(result.getInt("airline_id"));
-				
-				flight.setId(result.getInt("id"));
-				flight.setArrivalDate(result.getTimestamp("arrival_date"));
-				flight.setDepartureDate(result.getTimestamp("departure_date"));
-				flight.setFlightNo(result.getString("flight_no"));
-				flight.setAirline(airline);
-				flight.setArrivalAirport(arrAirport);
-				flight.setDepartureAirport(depAirport);
+				FlightData flight = new FlightDataBuilder().build(result);
 				
 				return flight;
 			}
@@ -208,6 +50,45 @@ public class FlightRepository implements IFlightDataRepository {
 		}
 		
 		return null;
+	}
+
+	@Override
+	protected void setUpUpdateQuery(FlightData entity) throws SQLException {
+		update.setString(1, entity.getFlightNo());
+		update.setTimestamp(2, entity.getDepartureDate());
+		update.setTimestamp(3, entity.getArrivalDate());
+		update.setTimestamp(4, entity.getCreateDate());
+		update.setInt(5, entity.getDepartureAirport().getId());
+		update.setInt(6, entity.getArrivalAirport().getId());
+		update.setInt(7, entity.getAirline().getId());
+		update.setInt(8, entity.getId());
+	}
+
+	@Override
+	protected void setUpInsertQuery(FlightData entity) throws SQLException {
+		insert.setInt(1, entity.getId());
+		insert.setString(2, entity.getFlightNo());
+		insert.setTimestamp(3, entity.getDepartureDate());
+		insert.setTimestamp(4, entity.getArrivalDate());
+		insert.setTimestamp(5, entity.getCreateDate());
+		insert.setInt(6, entity.getDepartureAirport().getId());
+		insert.setInt(7, entity.getArrivalAirport().getId());
+		insert.setInt(8, entity.getAirline().getId());
+	}
+
+	@Override
+	protected String getTableName() {
+		return "flight";
+	}
+
+	@Override
+	protected String getInsertQuery() {
+		return insertSql;
+	}
+
+	@Override
+	protected String getUpdateQuery() {
+		return updateSql;
 	}
 
 	
