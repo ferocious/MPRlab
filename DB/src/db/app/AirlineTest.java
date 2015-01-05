@@ -6,11 +6,12 @@ import java.util.List;
 import db.app.domain.AirlineData;
 import db.app.domain.CountryData;
 import db.app.repositories.impl.AirlineRepository;
+import db.app.unitofwork.IUnitOfWork;
 
 public class AirlineTest {
 
-	public void airlineTest(final Connection connection) {
-		AirlineRepository airlineRepo = new AirlineRepository(connection);
+	public void airlineTest(final Connection connection, IUnitOfWork uow) {
+		AirlineRepository airlineRepo = new AirlineRepository(connection, uow);
 		
 		insert(airlineRepo);
 		update(airlineRepo);

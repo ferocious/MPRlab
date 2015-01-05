@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import db.app.domain.CountryData;
 import db.app.repositories.ICountryDataRepository;
 import db.app.repositories.impl.builder.CountryDataBuilder;
+import db.app.unitofwork.IUnitOfWork;
 
 public class CountryRepository extends Repository<CountryData> implements ICountryDataRepository {
 	
@@ -13,8 +14,8 @@ public class CountryRepository extends Repository<CountryData> implements ICount
 	
 	private static String updateSql = "UPDATE country SET code = ?, name = ? WHERE id = ?";
 	
-	public CountryRepository(Connection connection) {
-		super(connection, new CountryDataBuilder());
+	public CountryRepository(Connection connection, IUnitOfWork uow) {
+		super(connection, new CountryDataBuilder(), uow);
 	}
 	
 	@Override

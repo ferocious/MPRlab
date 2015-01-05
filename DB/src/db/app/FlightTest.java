@@ -7,11 +7,12 @@ import db.app.domain.AirlineData;
 import db.app.domain.AirportData;
 import db.app.domain.FlightData;
 import db.app.repositories.impl.FlightRepository;
+import db.app.unitofwork.IUnitOfWork;
 
 public class FlightTest {
 
-	public void flightTest(Connection connection) {
-		FlightRepository flightRepo = new FlightRepository(connection);
+	public void flightTest(Connection connection, IUnitOfWork uow) {
+		FlightRepository flightRepo = new FlightRepository(connection, uow);
 		
 		insert(flightRepo);
 	}

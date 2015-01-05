@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import db.app.domain.AirlineData;
 import db.app.repositories.IAirlineDataRepository;
 import db.app.repositories.impl.builder.AirlineDataBuilder;
+import db.app.unitofwork.IUnitOfWork;
 
 public class AirlineRepository extends Repository<AirlineData> implements IAirlineDataRepository {
 	
@@ -19,8 +20,8 @@ public class AirlineRepository extends Repository<AirlineData> implements IAirli
 	
 	private PreparedStatement selectByCodeStatement;
 
-	public AirlineRepository(Connection connection) {
-		super(connection, new AirlineDataBuilder());
+	public AirlineRepository(Connection connection, IUnitOfWork uow) {
+		super(connection, new AirlineDataBuilder(), uow);
 		
 		try {
 			selectByCodeStatement = connection.prepareStatement(selectByCodeSql);

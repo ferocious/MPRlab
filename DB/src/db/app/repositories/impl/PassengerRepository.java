@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import db.app.domain.PassengerData;
 import db.app.repositories.IPassengerDataRepository;
 import db.app.repositories.impl.builder.PassengerDataBuilder;
+import db.app.unitofwork.IUnitOfWork;
 
 public class PassengerRepository extends Repository<PassengerData> implements IPassengerDataRepository {
 
@@ -21,8 +22,8 @@ public class PassengerRepository extends Repository<PassengerData> implements IP
 
 	private PreparedStatement selectByIdNoStatement;
 	
-	public PassengerRepository(Connection connection) {
-		super(connection, new PassengerDataBuilder());
+	public PassengerRepository(Connection connection, IUnitOfWork uow) {
+		super(connection, new PassengerDataBuilder(), uow);
 		
 		try {
 			selectByIdNoStatement = connection.prepareStatement(selectByIdNoSql);

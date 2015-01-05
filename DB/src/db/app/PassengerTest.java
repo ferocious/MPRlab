@@ -5,11 +5,12 @@ import java.sql.Connection;
 import db.app.domain.CountryData;
 import db.app.domain.PassengerData;
 import db.app.repositories.impl.PassengerRepository;
+import db.app.unitofwork.IUnitOfWork;
 
 public class PassengerTest {
 
-	public void passengerTest(Connection connection) {
-		PassengerRepository passengerRepo = new PassengerRepository(connection);
+	public void passengerTest(Connection connection, IUnitOfWork uow) {
+		PassengerRepository passengerRepo = new PassengerRepository(connection, uow);
 		
 		insert(passengerRepo);
 	}

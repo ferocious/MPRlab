@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import db.app.domain.FlightData;
 import db.app.repositories.IFlightDataRepository;
 import db.app.repositories.impl.builder.FlightDataBuilder;
+import db.app.unitofwork.IUnitOfWork;
 
 public class FlightRepository extends Repository<FlightData> implements IFlightDataRepository {
 
@@ -23,8 +24,8 @@ public class FlightRepository extends Repository<FlightData> implements IFlightD
 	
 	private PreparedStatement selectByFlightNoStatement;
 	
-	public FlightRepository(Connection connection) {
-		super(connection, new FlightDataBuilder());
+	public FlightRepository(Connection connection, IUnitOfWork uow) {
+		super(connection, new FlightDataBuilder(), uow);
 		
 		try {
 			selectByFlightNoStatement = connection.prepareStatement(selectByFlightNoSql);

@@ -7,19 +7,23 @@ import java.sql.SQLException;
 import db.app.domain.AirlineData;
 import db.app.repositories.IAirlineDataRepository;
 import db.app.repositories.impl.DummyRepositoryCatalog;
+import db.app.unitofwork.IUnitOfWork;
+import db.app.unitofwork.UnitOfWork;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException{
 		String connectionString = "jdbc:mysql://localhost/lotnisko";
 		
-		Connection connection = DriverManager.getConnection(connectionString, "root", "07041988");
+		Connection connection = DriverManager.getConnection(connectionString, "root", "xxx");
 		
-		new CountryTest().countryTest(connection);
-		new AirportTest().airportTest(connection);
-		new AirlineTest().airlineTest(connection);
-		new PassengerTest().passengerTest(connection);
-		new FlightTest().flightTest(connection);
+		IUnitOfWork uow = new UnitOfWork(connection);
+		
+		new CountryTest().countryTest(connection, uow);
+		new AirportTest().airportTest(connection, uow);
+		new AirlineTest().airlineTest(connection, uow);
+		new PassengerTest().passengerTest(connection, uow);
+		new FlightTest().flightTest(connection, uow);
 	}
 	
 	@SuppressWarnings("unused")

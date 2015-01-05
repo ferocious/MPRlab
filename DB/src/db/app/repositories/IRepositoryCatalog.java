@@ -6,4 +6,6 @@ public interface IRepositoryCatalog {
 	public IAirlineDataRepository getAirlineDataRepository();
 	public IFlightDataRepository getFlightDataRepository();
 	public IPassengerDataRepository getPassengerDataRepository();
+	public ICountryDataRepository getCountryDataRepository();
+	public void commit();
 }

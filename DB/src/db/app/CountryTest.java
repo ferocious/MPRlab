@@ -5,11 +5,12 @@ import java.util.List;
 
 import db.app.domain.CountryData;
 import db.app.repositories.impl.CountryRepository;
+import db.app.unitofwork.IUnitOfWork;
 
 public class CountryTest {
 
-	public void countryTest(Connection connection) {
-		CountryRepository countryRepo = new CountryRepository(connection);
+	public void countryTest(Connection connection, IUnitOfWork uow) {
+		CountryRepository countryRepo = new CountryRepository(connection, uow);
 
 		insertCountry(countryRepo);
 		updateCountry(countryRepo);
