@@ -14,7 +14,7 @@ public class RepositoryCatalogProvider {
 
 	public static IRepositoryCatalog catalog() {
 		try {
-			Connection connection = DriverManager.getConnection(url, "root", "07041988");
+			Connection connection = DriverManager.getConnection(url, "root", "xxx");
 			IUnitOfWork uow = new UnitOfWork(connection);
 			IRepositoryCatalog catalog = new RepositoryCatalog(connection, uow);
 			return catalog;
